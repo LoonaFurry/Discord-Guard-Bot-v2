@@ -83,7 +83,7 @@ async def on_ready():
             captcha_number = random.randint(1000, 9999)
 
             # Send the captcha message to the member
-            captcha_message = await member.send(f"Please solve the captcha: {captcha_number}")
+            captcha_message = await member.send(f"Please solve the captcha in 60 seconds otherwise you will be kicked: {captcha_number}")
 
             # Wait for the member to provide the response
             def check(message):
