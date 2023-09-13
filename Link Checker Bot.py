@@ -1,13 +1,24 @@
 import discord
 import requests
+import random
+from discord.ext import commands, tasks
 
 # Create a new Discord client with intents
 intents = discord.Intents.default()
 intents.message_content = True
-client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Your VirusTotal API key
-API_KEY = "your-virustotal-api-key"
+API_KEY = "8c8369b766b811703c1d73d541dd4de6242984df66a7b961628d3fe771b8c7e5"
+
+# List of status messages
+status_messages = [
+    "Checking Links",
+    "Watching The Chat",
+    "Looking To Link",
+    "Checking Links Safety",
+    "Checking All Links"
+]
 
 # Function to check if a link is safe using VirusTotal API
 def check_link_safety(link):
@@ -23,32 +34,32 @@ def check_link_safety(link):
     else:
         return False
 
-# Event triggered when the bot is ready and connected to Discord
-@client.event
+@bot.event
 async def on_ready():
     print("Bot is ready.")
+    change_status.start()
 
-# Event triggered when a message is received
-@client.event
+@tasks.loop(minutes=5)  # Change status every 5 minutes
+async def change_status():
+    new_status = random.choice(status_messages)
+    await bot.change_presence(activity=discord.Game(name=new_status))
+
+@bot.event
 async def on_message(message):
-    # Ignore messages sent by the bot itself to prevent an infinite loop
-    if message.author == client.user:
+    if message.author == bot.user:
         return
 
-    # Check if the message contains a link
     if message.content.startswith("http://") or message.content.startswith("https://"):
         link = message.content
-
-        # Check the safety of the link using VirusTotal API
         is_safe = check_link_safety(link)
 
         if is_safe:
             await message.channel.send("This link is safe.")
         else:
             await message.channel.send("This link is potentially dangerous. Please be cautious.")
-
-            # Delete the message containing the dangerous link
             await message.delete()
 
+    await bot.process_commands(message)
+
 # Run the bot with your Discord bot token
-client.run("your-token-here")
+bot.run("MTA2NzYyNTc1ODUwNTMxMjMyNg.GRwyuI.COvpLyI-mqj36wjZRONLLTZU8SJS2WNMYY1Ql4")
