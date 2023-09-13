@@ -405,4 +405,4 @@ def log_nickname_change(member_id, nickname_history):
         file.write(f"{timestamp} | Member ID: {member_id} | Nickname History: {nickname_history}\n")
 
 # Run the bot
-bot.run('MTA1MDczMzE4ODAxMzYyNTQwNA.G9aF0C.apySo3SlcBF9RxfW779CuqRtIawvRTi_uXWcXk')
+bot.run('your-token-here')
