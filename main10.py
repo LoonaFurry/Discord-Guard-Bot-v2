@@ -99,7 +99,7 @@ async def on_ready():
             # Check if the response matches the captcha number
             if user_response.content == str(captcha_number):
                 # If the member solves the captcha, assign them a random role from a list
-                roles = ["Member", "Member", "Member"]
+                roles = ["your-role-here", "your-role-here", "your-role-here"]
                 assigned_role = random.choice(roles)
                 role = discord.utils.get(member.guild.roles, name=assigned_role)
 
