@@ -9,7 +9,7 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Your VirusTotal API key
-API_KEY = "8c8369b766b811703c1d73d541dd4de6242984df66a7b961628d3fe771b8c7e5"
+API_KEY = "your-virus-total-api-key"
 
 # List of status messages
 status_messages = [
