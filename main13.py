@@ -42,4 +42,4 @@ async def on_message(message):
     await bot.process_commands(message)
 
 # Replace 'YOUR_BOT_TOKEN' with your actual bot token
-bot.run('MTA3NzMxMjMyNzUyOTAyMTU1MA.GqLhHx.cwVBwOIecKNFsNCpQMaExGVXAW-cER1hX_PSUw')
+bot.run('your-discord-token-here')
