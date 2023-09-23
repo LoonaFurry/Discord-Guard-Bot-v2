@@ -66,4 +66,5 @@ def get_random_status():
     return random.choice(statuses)
 
 # Replace 'YOUR_BOT_TOKEN' with your actual bot token
-bot.run('your-discord-token-here')
+bot = setup_discord_bot()
+bot.run('your-bot-token')
