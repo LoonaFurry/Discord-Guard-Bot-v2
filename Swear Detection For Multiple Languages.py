@@ -4,10 +4,12 @@ import discord
 from discord.ext import commands
 import asyncio
 
+# Initialize tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained("cardiffnlp/twitter-xlm-roberta-base-sentiment")
 model = AutoModelForSequenceClassification.from_pretrained("cardiffnlp/twitter-xlm-roberta-base-sentiment")
 
-def detect_swear(text):
+# Perform sentiment analysis on text
+def perform_sentiment_analysis(text):
     inputs = tokenizer.encode_plus(
         text,
         add_special_tokens=True,
@@ -17,6 +19,7 @@ def detect_swear(text):
     predictions = torch.argmax(outputs.logits, dim=1)
     return predictions.item()
 
+# Discord bot setup
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -31,7 +34,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    sentiment = detect_swear(message.content)
+    sentiment = perform_sentiment_analysis(message.content)
 
     if sentiment == 0:
         await message.delete()
